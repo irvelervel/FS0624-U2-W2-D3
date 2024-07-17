@@ -112,3 +112,182 @@ p.first {
       'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
 }
+
+// 5) VARIABILI
+// le variabili in SASS servono per memorizzare dei valori.
+// a quale scopo? al fine di rendere RIUTILIZZABILE quel valore
+// concettualmente le "variabili" in SASS sono più simili alle COSTANTI
+// (perchè una volta assegnatoci il valore iniziale, difficilmente lo si cambia)
+
+// cosa si può salvare in una variabile SASS?
+// - valori numerici (1, 50, 100, 10px, 2.5rem, 35%, etc.)
+// - stringhe ('hello', 'Lucida Sans', "italic", etc.)
+// - colori (red, yellow, rgb(0, 255, 255), #000000, #ffffff, etc.)
+// - booleani (true, false)
+// - null (l'assenza esplicita di un valore)
+// - valori combinati per proprietà shortcut (1px solid black, 0 auto, 25px 10px)
+// - liste di valori (10px, 16px, 24px) (più o meno come un array in JS)
+// - mappe di coppie chiave/valori (più o meno come gli oggetti in JS)
+
+// esempi
+$main-margin: 35px;
+// ho definito una variabile in SASS. D'ora in pi posso riutilizzarla semplicemente
+// invocandola con il suo nome
+
+h2 {
+  margin: $main-margin; // 35px
+}
+
+h1 {
+  font-size: $main-margin; // 35px
+  color: red;
+}
+
+$primary-color: rgb(35, 67, 120);
+
+// KISS -> Keep It Simple, Stupid!
+// dichiariamo le variabili una alla volta, utilizziamole una alla volta DOPO
+// la loro dichiarazione!
+
+p.colored {
+  color: $primary-color;
+}
+
+$primary-border: 1px solid $primary-color;
+
+div.image {
+  border: $primary-border; // 1px solid rgb(35, 67, 120);
+}
+
+// es. di mappa di coppie chiave/valori
+$sizes: (
+  xs: 10px,
+  sm: 12px,
+  md: 16px,
+  lg: 24px,
+  xl: 36px,
+);
+
+// SASS sa utilizzare anche OPERATORI LOGICI, di comparazione e matematici
+// ==, !=, >, <, >=, <=
+// + - / *
+
+// 6) MIXINS
+// un MIXIN è un BLOCCO di regole CSS a cui abbiamo dato un nome
+
+@mixin customStyles {
+  color: lightgreen;
+  border: $primary-border;
+  margin-left: $main-margin;
+}
+
+button.spotify {
+  // tutti i button con classe "spotify"
+  @include customStyles; // 3 regole importate in un colpo regole
+  padding: 10px;
+}
+
+// ma i mixin possono fare anche di più:
+@mixin customNav($my-background-color) {
+  display: flex;
+  flex-direction: row;
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+  }
+  justify-content: space-between;
+  background-color: $my-background-color;
+}
+
+.netflix-navbar {
+  @include customNav(red);
+  // red diventerà il valore di $my-background-color nel mixin
+}
+
+.spotify-navbar {
+  @include customNav(green);
+  // green diventerà il valore di $my-background-color nel mixin
+}
+
+@mixin myHeader($spacing) {
+  margin-left: $spacing;
+  margin-right: $spacing;
+  padding-left: $spacing;
+  padding-right: $spacing;
+}
+
+// 7) INTERPOLAZIONE
+
+// let x = 'Stefano'
+// `Io mi chiamo ${x}` // Io mi chiamo Stefano
+
+@mixin fontInterpolation($property, $value) {
+  // questo mixin applicherà delle regole su una proprietà DINAMICA
+  font-#{$property}: $value;
+}
+
+.my-class1 {
+  @include fontInterpolation('size', 2rem);
+  // font-size: 2rem;
+}
+
+.my-class2 {
+  @include fontInterpolation('weight', 700);
+  @include fontInterpolation('family', 'Lucida');
+  // font-weight: 700;
+  // font-family: Lucida;
+}
+
+// 8) CICLI
+// in SASS è possibile utilizzare dei cicli per AUTOMATIZZARE la generazione
+// di STILI o addirittura di intere CLASSI
+$my-sizes: 10px, 14px, 18px;
+
+// per ogni $single-size dentro $my-sizes
+@each $single-size in $my-sizes {
+  // quello che verrà eseguito qui dentro ripetuto TRE volte
+  // in cui ogni volta avete accesso al singolo elemento dell'array my-sizes
+  // (che verrà chiamato $single-size)
+
+  // in questo caso sto generando delle classi CSS che si chiamano pippo-* o ciao-*
+  // a seconda del valore individuale di $single-size: se è minore di 15px
+  // creo una classe "pippo", se è maggiore creo una classe "ciao"
+
+  @if $single-size < 15px {
+    .pippo-#{$single-size} {
+      margin: $single-size;
+    }
+  } @else {
+    .ciao-#{$single-size} {
+      margin: $single-size; // questo vale 10px al primo giro, 14px al secondo e 18px al terzo
+    }
+  }
+}
+
+// ciclo su MAPPA
+$sizes-map: (
+  xs: 10px,
+  sm: 12px,
+  medium: 16px,
+  lg: 20px,
+  xl: 28px,
+);
+
+@each $breakpoint, $value in $sizes-map {
+  .margin-#{$breakpoint} {
+    margin: 0 $value;
+  }
+}
+
+// .margin-xs {
+//    margin: 0 10px;
+// }
+// .margin-sm {
+//    margin: 0 12px;
+// }
+
+// 9) PARTIALS
+// SASS ci permette di lavorare su fogli separati scss, potenzialmente
+// piccoli e ben distribuiti, in modo da potersi occupare separatamente
+// di diverse porzioni di stile
+
+// passiamo a style.scss

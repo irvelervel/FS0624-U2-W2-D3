@@ -1,0 +1,17 @@
+$names: 'primary', 'secondary';
+
+// @each $name in $names {
+//   .button-#{$name} {
+//     background-color: '#{$}#{$name}'; // RIP
+//   }
+// }
+
+.button-primary {
+  background-color: $primary;
+  // primary è definito nell'altro partial, quello che si chiama "colors"
+}
+
+.button-secondary {
+  background-color: $secondary;
+  // primary è definito nell'altro partial, quello che si chiama "colors"
+}

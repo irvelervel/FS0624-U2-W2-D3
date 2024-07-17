@@ -1,0 +1,17 @@
+// qui dentro, NON scriverò nessuna riga di SASS "libera".
+// questo file serve solamente a "raggruppare" dei blocchi di stile
+// definiti in file più piccoli, detti "partials", che vivono nella cartella
+// omonima
+
+// qui dentro IMPORTIAMO TUTTI I PARTIALS
+@import 'partials/variables';
+@import 'partials/colors'; // notiamo che nel nome NON C'È né l'underscore né l'estensione!!
+@import 'partials/buttons';
+@import 'partials/footer';
+
+//
+// partials più comuni?
+// _reset.scss (spesso importato prima di tutto)
+// _header.scss, _footer.scss, _main.scss, etc.
+// _mixins.scss (dove mettete tutti i mixins, spesso anche lui importato in alto)
+//

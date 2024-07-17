@@ -40,4 +40,93 @@ p.first {
   font-weight: 400;
   font-style: italic;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  margin: 35px;
+}
+
+h1 {
+  font-size: 35px;
+  color: red;
+}
+
+p.colored {
+  color: rgb(35, 67, 120);
+}
+
+div.image {
+  border: 1px solid rgb(35, 67, 120);
+}
+
+button.spotify {
+  color: lightgreen;
+  border: 1px solid rgb(35, 67, 120);
+  margin-left: 35px;
+  padding: 10px;
+}
+
+.netflix-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: red;
+}
+@media screen and (min-width: 768px) {
+  .netflix-navbar {
+    flex-direction: column;
+  }
+}
+
+.spotify-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: green;
+}
+@media screen and (min-width: 768px) {
+  .spotify-navbar {
+    flex-direction: column;
+  }
+}
+
+.my-class1 {
+  font-size: 2rem;
+}
+
+.my-class2 {
+  font-weight: 700;
+  font-family: "Lucida";
+}
+
+.pippo-10px {
+  margin: 10px;
+}
+
+.pippo-14px {
+  margin: 14px;
+}
+
+.ciao-18px {
+  margin: 18px;
+}
+
+.margin-xs {
+  margin: 0 10px;
+}
+
+.margin-sm {
+  margin: 0 12px;
+}
+
+.margin-medium {
+  margin: 0 16px;
+}
+
+.margin-lg {
+  margin: 0 20px;
+}
+
+.margin-xl {
+  margin: 0 28px;
 }/*# sourceMappingURL=app.css.map */

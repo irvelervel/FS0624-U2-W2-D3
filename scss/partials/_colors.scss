@@ -1,0 +1,8 @@
+// questo file scss è un file PARTIAL
+// i file partials NON VENGONO COMPILATI da sass.
+
+// il fatto che il nome del file cominci con un _ indica che questo file è un
+// partial, e non verrà compilato automaticamente
+
+$primary: blue;
+$secondary: grey;
